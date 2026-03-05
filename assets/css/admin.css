@@ -1,0 +1,418 @@
+/* WOO 汇率转换 - 后台管理样式 */
+
+.woo-huilv-wrap {
+    max-width: 1200px;
+}
+
+.woo-huilv-wrap h1 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 23px;
+    padding: 9px 0;
+}
+
+.woo-huilv-wrap h1 .dashicons {
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+    color: #7c3aed;
+}
+
+/* 状态卡片 */
+.woo-huilv-status-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+}
+
+.status-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    transition: box-shadow 0.2s;
+}
+
+.status-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.status-card-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    color: #7c3aed;
+}
+
+.status-card-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.status-card-label {
+    font-size: 12px;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-card-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-top: 2px;
+}
+
+/* 区块样式 */
+.woo-huilv-section {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.woo-huilv-section h2 {
+    margin-top: 0;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f1f5f9;
+    color: #1e293b;
+    font-size: 18px;
+}
+
+.woo-huilv-section h2 small {
+    font-weight: normal;
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+/* 表格 */
+.woo-huilv-map-table {
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.woo-huilv-map-table thead th {
+    background: #f8fafc;
+    padding: 10px 12px;
+    font-weight: 600;
+    color: #475569;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.woo-huilv-map-table tbody td {
+    padding: 8px 12px;
+    vertical-align: middle;
+}
+
+.woo-huilv-map-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+.woo-huilv-map-table tfoot td {
+    padding: 12px;
+    background: #f8fafc;
+}
+
+.woo-huilv-map-table select {
+    min-width: 200px;
+}
+
+.woo-huilv-map-table .rate-display {
+    color: #059669;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+}
+
+/* 按钮 */
+#btn-refresh-rates {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 20px;
+    height: auto;
+    font-size: 14px;
+}
+
+#btn-refresh-rates .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+}
+
+#btn-refresh-rates.refreshing .dashicons {
+    animation: woo-huilv-spin 1s linear infinite;
+}
+
+@keyframes woo-huilv-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.btn-remove-row {
+    color: #ef4444 !important;
+    border-color: #fecaca !important;
+}
+
+.btn-remove-row:hover {
+    background: #fef2f2 !important;
+    border-color: #ef4444 !important;
+}
+
+.btn-remove-row .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    color: #ef4444;
+}
+
+#btn-add-mapping,
+#btn-add-decimal {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+#btn-add-mapping .dashicons,
+#btn-add-decimal .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+}
+
+/* 汇率网格 */
+.woo-huilv-rates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.rate-item {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 10px 14px;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.rate-item:hover {
+    border-color: #a78bfa;
+    box-shadow: 0 2px 8px rgba(124, 58, 237, 0.1);
+}
+
+.rate-item-active {
+    border-color: #7c3aed;
+    background: #faf5ff;
+}
+
+.rate-item-manual {
+    border-color: #f59e0b;
+    background: #fffbeb;
+}
+
+.rate-item-manual.rate-item-active {
+    border-color: #f59e0b;
+    background: #fffbeb;
+}
+
+.manual-tag {
+    display: inline-block;
+    background: #f59e0b;
+    color: #fff;
+    font-size: 10px;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-weight: 600;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+
+.rate-currency {
+    display: block;
+    font-weight: 700;
+    font-size: 15px;
+    color: #1e293b;
+    margin-bottom: 4px;
+}
+
+.rate-value {
+    display: block;
+    font-size: 13px;
+    color: #64748b;
+    font-family: 'Courier New', monospace;
+}
+
+/* 集成说明 */
+.woo-huilv-integration-info {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 20px;
+}
+
+/* 手动汇率 */
+.manual-rate-badge {
+    display: inline-block;
+    background: #f59e0b;
+    color: #fff;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.woo-huilv-add-manual-rate {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.woo-huilv-add-manual-rate select {
+    min-width: 200px;
+}
+
+#btn-add-manual-rate {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+#btn-add-manual-rate .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+}
+
+.btn-remove-manual-rate {
+    color: #ef4444 !important;
+    border-color: #fecaca !important;
+}
+
+.btn-remove-manual-rate:hover {
+    background: #fef2f2 !important;
+    border-color: #ef4444 !important;
+}
+
+.btn-remove-manual-rate .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    color: #ef4444;
+}
+
+.manual-rate-input {
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+}
+
+.woo-huilv-integration-info h4 {
+    margin-top: 16px;
+    margin-bottom: 8px;
+    color: #334155;
+}
+
+.woo-huilv-integration-info h4:first-child {
+    margin-top: 0;
+}
+
+.woo-huilv-integration-info ul {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.woo-huilv-integration-info ul li {
+    padding: 4px 0;
+    color: #475569;
+}
+
+.woo-huilv-code-block {
+    margin-top: 12px;
+}
+
+.woo-huilv-code-block p {
+    margin-bottom: 4px;
+    color: #475569;
+    font-size: 13px;
+}
+
+.woo-huilv-code-block code {
+    display: inline-block;
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-bottom: 8px;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+/* 刷新状态消息 */
+.woo-huilv-notice {
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin: 12px 0;
+    font-size: 14px;
+    display: none;
+}
+
+.woo-huilv-notice-success {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #166534;
+}
+
+.woo-huilv-notice-error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+}
+
+/* 表单样式优化 */
+.woo-huilv-section .form-table th {
+    width: 160px;
+    padding: 16px 10px 16px 0;
+}
+
+.woo-huilv-section .form-table td {
+    padding: 12px 10px;
+}
+
+.woo-huilv-section .form-table td .description {
+    color: #94a3b8;
+    font-style: normal;
+    margin-top: 6px;
+}
+
+/* 响应式 */
+@media (max-width: 782px) {
+    .woo-huilv-status-cards {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .woo-huilv-rates-grid {
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    }
+
+    .woo-huilv-map-table select {
+        min-width: 140px;
+    }
+}
+
+@media (max-width: 480px) {
+    .woo-huilv-status-cards {
+        grid-template-columns: 1fr;
+    }
+}
