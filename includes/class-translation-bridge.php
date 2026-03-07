@@ -158,10 +158,13 @@ class WOO_Huilv_Translation_Bridge {
     }
 
     /**
-     * 标准化语言代码为两位小写
+     * 标准化语言代码
+     *
+     * 保留 language-region 形式，便于精确映射如 en-gb、zh-hk；
+     * 若没有地区信息，则回退为两位语言代码。
      *
      * @param string $lang 原始语言代码
-     * @return string 标准化后的两位语言代码
+     * @return string 标准化后的语言代码
      */
     private static function normalize_lang( $lang ) {
         if ( empty( $lang ) ) {
@@ -169,20 +172,25 @@ class WOO_Huilv_Translation_Bridge {
         }
 
         $lang = strtolower( trim( $lang ) );
+        $lang = str_replace( '_', '-', $lang );
+        $lang = preg_replace( '/[^a-z-]/', '', $lang );
 
-        // 处理 locale 格式 (zh_CN, ja_JP, en_US)
-        if ( strpos( $lang, '_' ) !== false ) {
-            $parts = explode( '_', $lang );
-            return $parts[0];
+        if ( empty( $lang ) ) {
+            return '';
         }
 
-        // 处理 IETF 格式 (zh-cn, ja-jp)
         if ( strpos( $lang, '-' ) !== false ) {
             $parts = explode( '-', $lang );
-            return $parts[0];
+            $language = isset( $parts[0] ) ? substr( $parts[0], 0, 2 ) : '';
+            $region   = isset( $parts[1] ) ? substr( $parts[1], 0, 2 ) : '';
+
+            if ( ! empty( $language ) && ! empty( $region ) ) {
+                return $language . '-' . $region;
+            }
+
+            return $language;
         }
 
-        // 已经是短代码
         return substr( $lang, 0, 2 );
     }
 

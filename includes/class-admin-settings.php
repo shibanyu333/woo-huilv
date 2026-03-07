@@ -697,8 +697,11 @@ class WOO_Huilv_Admin_Settings {
     public static function get_common_languages() {
         return array(
             'en' => 'English 英语',
+            'en-gb' => 'English (United Kingdom) 英语（英国）',
             'ja' => '日本語 日语',
             'zh' => '中文 中文',
+            'hk' => '繁體中文（香港）',
+            'tw' => '繁體中文（台灣）',
             'ko' => '한국어 韩语',
             'fr' => 'Français 法语',
             'de' => 'Deutsch 德语',

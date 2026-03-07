@@ -99,6 +99,8 @@ class WOO_Huilv_Currency_Converter {
         $messages = array(
             'ja' => '※表示価格は参考値です。実際のお支払いは%sでの決済となります。',
             'zh' => '※ 显示价格仅供参考，实际以%s结算。',
+            'hk' => '※ 顯示價格僅供參考，實際以%s結算。',
+            'tw' => '※ 顯示價格僅供參考，實際以%s結算。',
             'ko' => '※ 표시 가격은 참고용이며, 실제 결제는 %s 기준입니다.',
             'de' => '※ Angezeigte Preise dienen als Referenz. Die Zahlung erfolgt in %s.',
             'fr' => '※ Prix affichés à titre indicatif. Le paiement sera effectué en %s.',
@@ -110,6 +112,7 @@ class WOO_Huilv_Currency_Converter {
             'th' => '※ ราคาที่แสดงเป็นเพียงการอ้างอิง การชำระเงินจริงเป็น %s',
             'vi' => '※ Giá hiển thị chỉ mang tính tham khảo. Thanh toán thực tế bằng %s.',
             'en' => '※ Prices shown are for reference only. Actual payment will be charged in %s.',
+            'en-gb' => '※ Prices shown are for reference only. Actual payment will be charged in %s.',
         );
 
         $messages = apply_filters( 'woo_huilv_rate_notice_messages', $messages );
