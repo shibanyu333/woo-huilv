@@ -222,12 +222,21 @@ class WOO_Huilv_Currency_Converter {
      * 转换产品价格
      */
     public static function convert_product_price( $price, $product ) {
-        if ( self::$is_converting || empty( $price ) || ! is_numeric( $price ) ) {
+        if ( self::$is_converting ) {
             return $price;
         }
 
         $target_currency = self::get_target_currency();
         if ( empty( $target_currency ) ) {
+            return $price;
+        }
+
+        $fixed_price = self::get_fixed_product_price( $product, $target_currency );
+        if ( '' !== $fixed_price && null !== $fixed_price ) {
+            return $fixed_price;
+        }
+
+        if ( '' === $price || null === $price || ! is_numeric( $price ) ) {
             return $price;
         }
 
@@ -238,12 +247,21 @@ class WOO_Huilv_Currency_Converter {
      * 转换变体价格
      */
     public static function convert_variation_price( $price, $variation, $product ) {
-        if ( self::$is_converting || empty( $price ) || ! is_numeric( $price ) ) {
+        if ( self::$is_converting ) {
             return $price;
         }
 
         $target_currency = self::get_target_currency();
         if ( empty( $target_currency ) ) {
+            return $price;
+        }
+
+        $fixed_price = self::get_fixed_product_price( $variation, $target_currency );
+        if ( '' !== $fixed_price && null !== $fixed_price ) {
+            return $fixed_price;
+        }
+
+        if ( '' === $price || null === $price || ! is_numeric( $price ) ) {
             return $price;
         }
 
@@ -443,6 +461,30 @@ class WOO_Huilv_Currency_Converter {
         }
 
         return round( $price, $decimals );
+    }
+
+    /**
+     * 获取商品固定价格（如有设置）
+     *
+     * @param WC_Product|int $product  商品对象或 ID
+     * @param string         $currency 目标货币
+     * @return float|string
+     */
+    private static function get_fixed_product_price( $product, $currency ) {
+        if ( ! class_exists( 'WOO_Huilv_Product_Fixed_Prices' ) ) {
+            return '';
+        }
+
+        $filter     = current_filter();
+        $price_type = 'price';
+
+        if ( false !== strpos( $filter, 'regular_price' ) ) {
+            $price_type = 'regular';
+        } elseif ( false !== strpos( $filter, 'sale_price' ) ) {
+            $price_type = 'sale';
+        }
+
+        return WOO_Huilv_Product_Fixed_Prices::get_fixed_price( $product, $currency, $price_type );
     }
 
     /**

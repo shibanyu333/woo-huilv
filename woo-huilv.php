@@ -3,8 +3,8 @@
  * Plugin Name: WOO 汇率转换
  * Plugin URI: https://example.com/woo-huilv
  * Description: 根据翻译插件的语言切换，自动将 WooCommerce 商品价格转换为对应地区的货币。支持 ExchangeRate API，可配置刷新频率。
- * Version: 1.0.0
- * Author: Developer
+ * Version: 0.3
+ * Author: 石斑鱼定制
  * Author URI: https://example.com
  * Text Domain: woo-huilv
  * Domain Path: /languages
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // 插件常量
-define( 'WOO_HUILV_VERSION', '1.0.0' );
+define( 'WOO_HUILV_VERSION', '0.3' );
 define( 'WOO_HUILV_FILE', __FILE__ );
 define( 'WOO_HUILV_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WOO_HUILV_URL', plugin_dir_url( __FILE__ ) );
@@ -60,6 +60,7 @@ final class WOO_Huilv {
     private function includes() {
         require_once WOO_HUILV_PATH . 'includes/class-exchange-rate-api.php';
         require_once WOO_HUILV_PATH . 'includes/class-currency-converter.php';
+        require_once WOO_HUILV_PATH . 'includes/class-product-fixed-prices.php';
         require_once WOO_HUILV_PATH . 'includes/class-translation-bridge.php';
 
         if ( is_admin() ) {
