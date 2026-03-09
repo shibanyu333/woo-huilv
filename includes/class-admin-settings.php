@@ -42,6 +42,9 @@ class WOO_Huilv_Admin_Settings {
             'sanitize_callback' => 'sanitize_text_field',
         ) );
         register_setting( 'woo_huilv_settings', 'woo_huilv_show_rate_notice' );
+        register_setting( 'woo_huilv_settings', 'woo_huilv_currency_display', array(
+            'sanitize_callback' => array( __CLASS__, 'sanitize_currency_display' ),
+        ) );
         register_setting( 'woo_huilv_settings', 'woo_huilv_api_key', array(
             'sanitize_callback' => 'sanitize_text_field',
         ) );
@@ -118,6 +121,14 @@ class WOO_Huilv_Admin_Settings {
     }
 
     /**
+     * 清理货币显示方式
+     */
+    public static function sanitize_currency_display( $input ) {
+        $input = sanitize_text_field( $input );
+        return in_array( $input, array( 'symbol', 'code' ), true ) ? $input : 'symbol';
+    }
+
+    /**
      * 加载资源
      */
     public static function enqueue_assets( $hook ) {
@@ -164,6 +175,7 @@ class WOO_Huilv_Admin_Settings {
         $test_mode      = get_option( 'woo_huilv_test_mode', 'no' );
         $test_currency  = get_option( 'woo_huilv_test_currency', 'JPY' );
         $show_notice    = get_option( 'woo_huilv_show_rate_notice', 'yes' );
+        $currency_display = get_option( 'woo_huilv_currency_display', 'symbol' );
         $api_key        = get_option( 'woo_huilv_api_key', '' );
         $base_currency  = WOO_Huilv_Exchange_Rate_API::get_base_currency();
         $auto_refresh  = get_option( 'woo_huilv_auto_refresh', 'yes' );
@@ -271,6 +283,22 @@ class WOO_Huilv_Admin_Settings {
                                     <?php esc_html_e( '在购物车和结账页显示"价格仅供参考"提示', 'woo-huilv' ); ?>
                                 </label>
                                 <p class="description"><?php esc_html_e( '当发生货币转换时，在购物车/结账页顶部显示一条提示，告知用户实际结算币种。提示语言会自动匹配当前语言。', 'woo-huilv' ); ?></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><?php esc_html_e( '货币显示方式', 'woo-huilv' ); ?></th>
+                            <td>
+                                <fieldset>
+                                    <label style="display:inline-block;margin-right:18px;">
+                                        <input type="radio" name="woo_huilv_currency_display" value="symbol" <?php checked( $currency_display, 'symbol' ); ?> />
+                                        <?php esc_html_e( '显示货币符号（如 $）', 'woo-huilv' ); ?>
+                                    </label>
+                                    <label style="display:inline-block;">
+                                        <input type="radio" name="woo_huilv_currency_display" value="code" <?php checked( $currency_display, 'code' ); ?> />
+                                        <?php esc_html_e( '显示货币代码（如 USD）', 'woo-huilv' ); ?>
+                                    </label>
+                                </fieldset>
+                                <p class="description"><?php esc_html_e( '仅影响前台价格展示格式，不影响实际结算币种和汇率计算。', 'woo-huilv' ); ?></p>
                             </td>
                         </tr>
                         <tr>

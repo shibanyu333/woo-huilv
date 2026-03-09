@@ -124,6 +124,7 @@ final class WOO_Huilv {
             'test_mode'         => 'no',
             'test_currency'     => 'JPY',
             'show_rate_notice'  => 'yes',
+            'currency_display'  => 'symbol',
             'manual_rates'      => array(),
             'language_currency_map' => array(
                 'ja' => 'JPY',

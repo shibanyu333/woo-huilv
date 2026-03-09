@@ -51,6 +51,8 @@ class WOO_Huilv_Currency_Converter {
 
             // 货币符号
             add_filter( 'woocommerce_currency', array( __CLASS__, 'filter_currency' ), 9999 );
+            add_filter( 'woocommerce_currency_symbol', array( __CLASS__, 'filter_currency_symbol' ), 9999, 2 );
+            add_filter( 'woocommerce_price_format', array( __CLASS__, 'filter_price_format' ), 9999, 2 );
 
             // 小数位数
             add_filter( 'wc_get_price_decimals', array( __CLASS__, 'filter_price_decimals' ), 9999 );
@@ -297,6 +299,47 @@ class WOO_Huilv_Currency_Converter {
         }
 
         return $currency;
+    }
+
+    /**
+     * 过滤货币显示（符号/代码）
+     *
+     * @param string $currency_symbol 当前货币符号
+     * @param string $currency        当前货币代码
+     * @return string
+     */
+    public static function filter_currency_symbol( $currency_symbol, $currency ) {
+        $display_mode = get_option( 'woo_huilv_currency_display', 'symbol' );
+
+        if ( 'code' === $display_mode ) {
+            return strtoupper( trim( $currency ) );
+        }
+
+        return $currency_symbol;
+    }
+
+    /**
+     * 过滤价格格式，在货币字符和金额之间增加分隔空隙
+     *
+     * @param string $format       当前价格格式
+     * @param string $currency_pos 货币位置
+     * @return string
+     */
+    public static function filter_price_format( $format, $currency_pos ) {
+        $separator = '&nbsp;&nbsp;';
+
+        switch ( $currency_pos ) {
+            case 'left':
+                return '%1$s' . $separator . '%2$s';
+            case 'right':
+                return '%2$s' . $separator . '%1$s';
+            case 'left_space':
+                return '%1$s' . $separator . '%2$s';
+            case 'right_space':
+                return '%2$s' . $separator . '%1$s';
+            default:
+                return $format;
+        }
     }
 
     /**
